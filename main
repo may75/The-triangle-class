@@ -1,0 +1,78 @@
+# parent class
+class geometricobject:
+    def __init__(self, color = 'green', filled = True):
+        self.__color = color # color of geomeric object
+        self.__filled = filled  # fill status
+    
+    def get_color(self): # The accessor method for color
+        
+        # If user not enter green color the color not validated
+        if self.__color != 'green': 
+            return "Color is NOT validated"
+        else:
+            return 'green'
+            
+    
+    def is_filled(self): # The accessor for filled status
+        return self.__filled
+    
+    def set_color(self,color): # Setter for color
+        self.__color = color
+   
+    def set_filled(self,filled): # Setter for filled status
+        self.__filled = filled
+   
+    def __str__(self): # Display string representation for the object
+        return 'Color: %s and Filled: %s' % (self.__color, str(self.__filled))
+
+class triangle(geometricobject): # Class trinagle extends geometricobject class
+    
+    def __init__(self, side1 = 1.0, side2 = 1.0, side3 = 1.0, color = 'green',\
+                 filled = True):
+        super().__init__(color,filled)
+        self.__side1 = side1
+        self.__side2 = side2
+        self.__side3 = side3
+        
+    def get_side1(self):
+        return self.__side1
+    
+    def get_side2(self):
+        return self.__side2
+
+    def get_side3(self):
+        return self.__side3
+   
+    def get_area(self):
+        s = self.get_perimeter() / 2
+        return (s * (s - self.__side1) * (s - self.__side2) * 
+                (s - self.__side3)) ** 0.5
+    
+    def get_perimeter(self):
+        return self.__side1 + self.__side2 + self.__side3
+    
+    def __str__(self):  # Return three sides
+        info = "\nNot expected to draw triangle\n""\nTriangle:"\
+        "side1 = {}, side2 = {},  side3 = {}"\
+        .format(self.__side1, self.__side2, self.__side3)
+        return info
+    
+    
+if __name__ == '__main__':
+    # Prompet user to enter all information
+    side1 = float(input("Enter the value of side1: "))
+    side2 = float(input("Enter the value of side2: "))
+    side3 = float(input("Enter the value of side3: "))
+    color = str(input("Enter a color: "))
+    filled = input('Enter triangle filled (1: True , 0: False)? ')
+    filled = (filled == "1") # Fill the triangle with color if specified
+    mytriangle = triangle(side1, side2, side3,color,filled)
+
+# Display Infomration
+    
+    print(mytriangle)
+    print("\nArea: ", mytriangle.get_area())
+    print("Perimeter: ", mytriangle.get_perimeter()) 
+    print("Color: ", mytriangle.get_color())
+    print("Filled: ", mytriangle.is_filled())
+    
